@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:text="vs Player"
+        android:id="@+id/tvVsPlayer"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:text="my Score"
+        android:id="@+id/tvMyScore"
+        android:gravity="center"
+        />
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:text="vs Score"
+        android:id="@+id/tvVsScore"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:text="Winer ?"
+        android:id="@+id/tvWinner"
+        android:gravity="center"
+        />
+</LinearLayout>

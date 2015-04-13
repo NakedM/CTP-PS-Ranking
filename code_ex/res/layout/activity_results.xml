@@ -1,0 +1,149 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/bg_title"
+    tools:context="com.netmarble.lostcitiesclient.ResultsActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/linearLayout"
+        android:layout_above="@+id/linearLayout2"
+        >
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Total"
+                android:id="@+id/tvTitleTotal"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Wins"
+                android:id="@+id/tvTitleWins"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Loses"
+                android:id="@+id/tvTitleLoses"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Draws"
+                android:id="@+id/tvTitleDraws"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Total"
+                android:id="@+id/tvTotal"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Wins"
+                android:id="@+id/tvWins"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Loses"
+                android:id="@+id/tvLoses"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Draws"
+                android:id="@+id/tvDraws"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_above="@+id/lvLastPlays"
+        android:id="@+id/linearLayout2">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Vs Player"
+            android:textSize = "15dp"
+            android:id="@+id/tvTitleVsPlayer"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Your Score"
+            android:textSize = "15dp"
+            android:id="@+id/tvTitleMyScore"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Vs Score"
+            android:textSize = "15dp"
+            android:id="@+id/tvTitleVsScore"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Winner"
+            android:textSize = "15dp"
+            android:id="@+id/tvTitleWinner"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/lvLastPlays"
+        android:layout_above="@+id/btGoCenter"
+        />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="BACK"
+        android:id="@+id/btGoCenter"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

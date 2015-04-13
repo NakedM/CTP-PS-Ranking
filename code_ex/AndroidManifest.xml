@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hongmin.lostcitiesclient" >
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        android:name ="com.hongmin.lostcitiesclient.ApplicationClass" >
+        <activity
+            android:name=".MainLoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_splash" >
+        </activity>
+        <activity
+            android:name=".JoinActivity"
+            android:label="@string/title_activity_join" >
+        </activity>
+        <activity
+            android:name=".CenterActivity"
+            android:label="@string/title_activity_center" >
+        </activity>
+        <activity
+            android:name=".ResultsActivity"
+            android:label="@string/title_activity_results" >
+        </activity>
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+</manifest>
