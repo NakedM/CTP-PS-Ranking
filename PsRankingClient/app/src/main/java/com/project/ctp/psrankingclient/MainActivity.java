@@ -1,10 +1,11 @@
 package com.project.ctp.psrankingclient;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
+import android.view.View;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -14,6 +15,27 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void onClick(View view)
+    {
+        switch(view.getId())
+        {
+            case R.id.btn_moveToRankingActivity: //랭킹 액티비티로 이동
+                Intent intent_moveToRanking = new Intent(this, RankingActivity.class);
+                startActivity(intent_moveToRanking);
+                break;
+            case R.id.btn_moveToSearchProblemActivity: //검색 액티비티로 이동
+                Intent intent_moveToSearch = new Intent(this, SearchProblemActivity.class);
+                startActivity(intent_moveToSearch);
+                break;
+            case R.id.btn_moveToSettingActivity: //설정 액티비티로 이동
+                Intent intent_moveToSetting = new Intent(this, SettingActivity.class);
+                startActivity(intent_moveToSetting);
+                break;
+            case R.id.btn_exit:
+                super.finish();
+                break;
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
