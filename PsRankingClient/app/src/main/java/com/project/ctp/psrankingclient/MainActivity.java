@@ -24,7 +24,6 @@ public class MainActivity extends ActionBarActivity {
         btn_moveToSettingActivity = (Button)findViewById(R.id.btn_moveToSettingActivity);
         btn_exit = (Button)findViewById(R.id.btn_exit);
 
-
         Intent intent_moveToSplashActivity = new Intent(this, SplashActivity.class);
         startActivity(intent_moveToSplashActivity);
 
@@ -52,6 +51,8 @@ public class MainActivity extends ActionBarActivity {
                 }
             }
         };
+
+
 
         btn_moveToRankingActivity.setOnClickListener(listener);
         btn_moveToSearchProblemActivity.setOnClickListener(listener);
