@@ -8,5 +8,6 @@
     <string name="title_activity_ranking">RankingActivity</string>
     <string name="title_activity_search_problem">SearchProblemActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
 
 </resources>
