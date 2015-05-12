@@ -13,12 +13,9 @@
 
 
     <Button
-<<<<<<< HEAD
         android:id="@+id/btn_moveToRankingActivity"
-=======
         android:id = "@+id/btn_moveRankingAct"
         android:onClick = "onClick"
->>>>>>> origin/master
         android:layout_width="300dp"
         android:layout_height="60dp"
         android:layout_marginBottom="10dp"
