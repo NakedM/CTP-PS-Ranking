@@ -1,17 +1,28 @@
 package com.project.ctp.psrankingclient;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
 public class SearchProblemActivity extends ActionBarActivity {
 
     private Button btn_selectOldOrder;
     private Button btn_selectYoungOrder;
+    private Button btn_search;
+    private String strOld;
+    private String strYoung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,19 @@ public class SearchProblemActivity extends ActionBarActivity {
                 unregisterForContextMenu(v);
             }
         });
+
+
+        btn_search = (Button)findViewById(R.id.btn_search);
+        btn_search.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                setList(R.id.list_solve);
+                setList(R.id.list_solveNot);
+            }
+        });
+
     }
 
     @Override
@@ -49,52 +73,13 @@ public class SearchProblemActivity extends ActionBarActivity {
         if(v==btn_selectOldOrder) //오래된 기수를 선택했을때 group_id is 0
         {
             menu.setHeaderTitle("오래된 기수");
-            menu.add(0,0,0,"전체");
-            menu.add(0,1,0,"2011/1");
-            menu.add(0,2,0,"2011/2");
-            menu.add(0,3,0,"2012/1");
-            menu.add(0,4,0,"2012/2");
-            menu.add(0,5,0,"2013/1");
-            menu.add(0,6,0,"2013/2");
-            menu.add(0,7,0,"2014/1");
-            menu.add(0,8,0,"2014/2");
-            menu.add(0,9,0,"2015/1");
-            menu.add(0,10,0,"2015/2");
-            menu.add(0,11,0,"2016/1");
-            menu.add(0,12,0,"2016/2");
-            menu.add(0,13,0,"2017/1");
-            menu.add(0,14,0,"2017/2");
-            menu.add(0,15,0,"2018/1");
-            menu.add(0,16,0,"2018/2");
-            menu.add(0,17,0,"2019/1");
-            menu.add(0,18,0,"2019/2");
-            menu.add(0,19,0,"2020/1");
-            menu.add(0,20,0,"2020/2");
+            setContexMenu(menu, 0);
+
         }
         else if(v==btn_selectYoungOrder) //최근 기수를 선택했을때 group_id is 1
         {
             menu.setHeaderTitle("최근 기수");
-            menu.add(1, 0, 0, "전체");
-            menu.add(1, 1, 0, "2011/1");
-            menu.add(1, 2, 0, "2011/2");
-            menu.add(1, 3, 0, "2012/1");
-            menu.add(1, 4, 0, "2012/2");
-            menu.add(1, 5, 0, "2013/1");
-            menu.add(1, 6, 0, "2013/2");
-            menu.add(1, 7, 0, "2014/1");
-            menu.add(1, 8, 0, "2014/2");
-            menu.add(1, 9, 0, "2015/1");
-            menu.add(1, 10, 0, "2015/2");
-            menu.add(1, 11, 0, "2016/1");
-            menu.add(1, 12, 0, "2016/2");
-            menu.add(1, 13, 0, "2017/1");
-            menu.add(1, 14, 0, "2017/2");
-            menu.add(1, 15, 0, "2018/1");
-            menu.add(1, 16, 0, "2018/2");
-            menu.add(1, 17, 0, "2019/1");
-            menu.add(1, 18, 0, "2019/2");
-            menu.add(1, 19, 0, "2020/1");
-            menu.add(1, 20, 0, "2020/2");
+            setContexMenu(menu, 1);
         }
     }
 
@@ -107,6 +92,7 @@ public class SearchProblemActivity extends ActionBarActivity {
             {
                 case 1:
             }*/
+            strOld = item.getTitle().toString();
             btn_selectOldOrder.setText(item.getTitle()); // 버튼 내용 변경
         }
         else if(item.getGroupId() == 1)
@@ -115,9 +101,60 @@ public class SearchProblemActivity extends ActionBarActivity {
             {
                 case 1:
             }*/
+            strYoung = item.getTitle().toString();
             btn_selectYoungOrder.setText(item.getTitle());
         }
         return true;
     }
 
+    private void setContexMenu(ContextMenu menu, int GID)
+    {
+        menu.add(GID, 0, 0, "전체");
+        menu.add(GID, 1, 0, "2011/1");
+        menu.add(GID, 2, 0, "2011/2");
+        menu.add(GID, 3, 0, "2012/1");
+        menu.add(GID, 4, 0, "2012/2");
+        menu.add(GID, 5, 0, "2013/1");
+        menu.add(GID, 6, 0, "2013/2");
+        menu.add(GID, 7, 0, "2014/1");
+        menu.add(GID, 8, 0, "2014/2");
+        menu.add(GID, 9, 0, "2015/1");
+        menu.add(GID, 10, 0, "2015/2");
+        menu.add(GID, 11, 0, "2016/1");
+        menu.add(GID, 12, 0, "2016/2");
+        menu.add(GID, 13, 0, "2017/1");
+        menu.add(GID, 14, 0, "2017/2");
+        menu.add(GID, 15, 0, "2018/1");
+        menu.add(GID, 16, 0, "2018/2");
+        menu.add(GID, 17, 0, "2019/1");
+        menu.add(GID, 18, 0, "2019/2");
+        menu.add(GID, 19, 0, "2020/1");
+        menu.add(GID, 20, 0, "2020/2");
+    }
+
+    private void setList(int listName) {
+        ArrayList<String> List = new ArrayList<String>();
+        List.add("test list");
+
+        ArrayAdapter<String> Adapter;
+        //어댑터 생성
+        Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, List);
+
+        ListView list = (ListView) findViewById(listName);
+        //myList와 ListView와 연결
+        list.setAdapter(Adapter);
+
+        list.setDivider(new ColorDrawable(Color.WHITE));
+        list.setDividerHeight(2);
+
+        //리스트 아이템 클릭시 발생하는 함수
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SearchProblemActivity.this, UserInfoActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
