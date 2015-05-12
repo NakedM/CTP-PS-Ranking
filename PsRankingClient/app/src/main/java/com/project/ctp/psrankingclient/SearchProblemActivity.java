@@ -1,28 +1,17 @@
 package com.project.ctp.psrankingclient;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
-
-import java.util.ArrayList;
 
 
 public class SearchProblemActivity extends ActionBarActivity {
 
     private Button btn_selectOldOrder;
     private Button btn_selectYoungOrder;
-    private Button btn_search;
-    private String strOld;
-    private String strYoung;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +39,6 @@ public class SearchProblemActivity extends ActionBarActivity {
                 unregisterForContextMenu(v);
             }
         });
-
-
-        btn_search = (Button)findViewById(R.id.btn_search);
-        btn_search.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                setList(R.id.list_solve);
-                setList(R.id.list_solveNot);
-            }
-        });
-
     }
 
     @Override
@@ -92,7 +68,6 @@ public class SearchProblemActivity extends ActionBarActivity {
             {
                 case 1:
             }*/
-            strOld = item.getTitle().toString();
             btn_selectOldOrder.setText(item.getTitle()); // 버튼 내용 변경
         }
         else if(item.getGroupId() == 1)
@@ -101,13 +76,12 @@ public class SearchProblemActivity extends ActionBarActivity {
             {
                 case 1:
             }*/
-            strYoung = item.getTitle().toString();
             btn_selectYoungOrder.setText(item.getTitle());
         }
         return true;
     }
 
-    private void setContexMenu(ContextMenu menu, int GID)
+    public void setContexMenu(ContextMenu menu, int GID)
     {
         menu.add(GID, 0, 0, "전체");
         menu.add(GID, 1, 0, "2011/1");
@@ -130,31 +104,5 @@ public class SearchProblemActivity extends ActionBarActivity {
         menu.add(GID, 18, 0, "2019/2");
         menu.add(GID, 19, 0, "2020/1");
         menu.add(GID, 20, 0, "2020/2");
-    }
-
-    private void setList(int listName) {
-        ArrayList<String> List = new ArrayList<String>();
-        List.add("test list");
-
-        ArrayAdapter<String> Adapter;
-        //어댑터 생성
-        Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, List);
-
-        ListView list = (ListView) findViewById(listName);
-        //myList와 ListView와 연결
-        list.setAdapter(Adapter);
-
-        list.setDivider(new ColorDrawable(Color.WHITE));
-        list.setDividerHeight(2);
-
-        //리스트 아이템 클릭시 발생하는 함수
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SearchProblemActivity.this, UserInfoActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

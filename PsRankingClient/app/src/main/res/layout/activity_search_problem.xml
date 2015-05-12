@@ -1,20 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context="com.project.ctp.psrankingclient.SearchProblemActivity">
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.project.ctp.psrankingclient.SearchProblemActivity">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="문제번호 입력"
         android:inputType="number"/>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -24,48 +21,19 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="기수"/>
-
         <TextView
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:paddingLeft="10dp"
             android:text="~"/>
-
         <Button
             android:id="@+id/btn_selectYoungOrder"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="기수"/>
-
-        <Button
-            android:id = "@+id/btn_search"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:text="검색"/>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="푼 사람"
-        android:textSize="30dp"/>
-
-    <ListView
-        android:id="@+id/list_solve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="못 푼 사람"
-        android:textSize="30dp"/>
-
-    <ListView
-        android:id="@+id/list_solveNot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></ListView>
-
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:text="검색"/>
+        </LinearLayout>
 </LinearLayout>
