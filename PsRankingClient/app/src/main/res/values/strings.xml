@@ -9,13 +9,13 @@
     <string name="title_activity_search_problem">SearchProblemActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_user_info">UserInfoActivity</string>
-
-
     <string name="title_fragment_all">전체</string>
     <string name="title_fragment_year">기수</string>
     <string name="title_fragment_student_number">학번</string>
+    <string name="title_fragment_user_info_text">텍스트</string>
+    <string name="title_fragment_user_info_graph">그래프</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

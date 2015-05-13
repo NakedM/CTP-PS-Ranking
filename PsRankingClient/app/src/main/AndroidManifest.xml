@@ -36,10 +36,7 @@
             android:name=".UserInfoActivity"
             android:label="@string/title_activity_user_info" >
         </activity>
-        <activity
-            android:name=".ranking"
-            android:label="@string/title_activity_ranking" >
-        </activity>
     </application>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
 </manifest>

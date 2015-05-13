@@ -26,4 +26,11 @@
             android:text="설정"/>
     </LinearLayout>
 
+    <Button
+        android:id = "@+id/btn_myInfo"
+        android:onClick="onClick"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="나의 정보"/>
+
 </RelativeLayout>
