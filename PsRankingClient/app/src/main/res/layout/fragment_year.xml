@@ -1,10 +1,48 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="기수별 랭킹"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="10dp">
+
+
+<Button
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:text="학번" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:text="등수" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:text="이름" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textSize="40dp"
+            android:text="아이디" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
 </LinearLayout>
