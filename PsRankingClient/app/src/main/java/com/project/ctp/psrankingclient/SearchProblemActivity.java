@@ -1,17 +1,19 @@
 package com.project.ctp.psrankingclient;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -133,20 +135,20 @@ public class SearchProblemActivity extends ActionBarActivity {
     }
 
     private void setList(int listName) {
-        ArrayList<String> List = new ArrayList<String>();
-        List.add("test list");
+        ArrayList<User> arUser;
+        arUser = new ArrayList<User>();
+        User user;
+        user = new User("pppgod", "strangeyun");
+        arUser.add(user);
+        user = new User("dodo3371", "nuclear");
+        arUser.add(user);
 
-        ArrayAdapter<String> Adapter;
-        //어댑터 생성
-        Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, List);
+        UserAdapter adapter = new UserAdapter(this, R.layout.custom_user_list, arUser);
 
-        ListView list = (ListView) findViewById(listName);
-        //myList와 ListView와 연결
-        list.setAdapter(Adapter);
-
-        list.setDivider(new ColorDrawable(Color.WHITE));
+        ListView list;
+        list = (ListView)findViewById(listName);
+        list.setAdapter(adapter);
         list.setDividerHeight(2);
-
         //리스트 아이템 클릭시 발생하는 함수
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -156,5 +158,60 @@ public class SearchProblemActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+    }
+}
+
+class User{
+    String id;
+    String name;
+
+    User(String cid, String cname){
+        id = cid;
+        name = cname;
+    }
+}
+
+class UserAdapter extends BaseAdapter
+{
+    Context con;
+    LayoutInflater inflacter;
+    ArrayList<User> arD;
+    int layout;
+
+    public UserAdapter(Context context, int alayout, ArrayList<User> aarD) {
+        con = context;
+        inflacter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        arD = aarD;
+        layout = alayout;
+    }
+
+    @Override
+    public int getCount(){
+        return arD.size();
+    }
+
+    @Override
+    public Object getItem(int position){
+        return arD.get(position).name;
+    }
+
+    @Override
+    public long getItemId(int position){
+        return position;
+    }
+
+    @Override //보여지는 함수
+    public View getView(final int position, View convertView, ViewGroup parent){
+        if(convertView == null){
+            convertView = inflacter.inflate(layout, parent, false);
+        }
+
+        TextView id = (TextView) convertView.findViewById(R.id.id);
+        id.setText(arD.get(position).id);
+
+        TextView name = (TextView) convertView.findViewById(R.id.name);
+        name.setText(arD.get(position).name);
+
+        return convertView;
     }
 }
