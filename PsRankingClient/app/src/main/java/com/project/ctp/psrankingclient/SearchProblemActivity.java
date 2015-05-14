@@ -159,59 +159,60 @@ public class SearchProblemActivity extends ActionBarActivity {
             }
         });
     }
-}
 
-class User{
-    String id;
-    String name;
 
-    User(String cid, String cname){
-        id = cid;
-        name = cname;
-    }
-}
+    private class User{
+        String id;
+        String name;
 
-class UserAdapter extends BaseAdapter
-{
-    Context con;
-    LayoutInflater inflacter;
-    ArrayList<User> arD;
-    int layout;
-
-    public UserAdapter(Context context, int alayout, ArrayList<User> aarD) {
-        con = context;
-        inflacter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        arD = aarD;
-        layout = alayout;
+        User(String cid, String cname){
+            id = cid;
+            name = cname;
+        }
     }
 
-    @Override
-    public int getCount(){
-        return arD.size();
-    }
+    private class UserAdapter extends BaseAdapter
+    {
+        Context con;
+        LayoutInflater inflacter;
+        ArrayList<User> arD;
+        int layout;
 
-    @Override
-    public Object getItem(int position){
-        return arD.get(position).name;
-    }
-
-    @Override
-    public long getItemId(int position){
-        return position;
-    }
-
-    @Override //보여지는 함수
-    public View getView(final int position, View convertView, ViewGroup parent){
-        if(convertView == null){
-            convertView = inflacter.inflate(layout, parent, false);
+        public UserAdapter(Context context, int alayout, ArrayList<User> aarD) {
+            con = context;
+            inflacter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            arD = aarD;
+            layout = alayout;
         }
 
-        TextView id = (TextView) convertView.findViewById(R.id.id);
-        id.setText(arD.get(position).id);
+        @Override
+        public int getCount(){
+            return arD.size();
+        }
 
-        TextView name = (TextView) convertView.findViewById(R.id.name);
-        name.setText(arD.get(position).name);
+        @Override
+        public Object getItem(int position){
+            return arD.get(position).name;
+        }
 
-        return convertView;
+        @Override
+        public long getItemId(int position){
+            return position;
+        }
+
+        @Override //보여지는 함수
+        public View getView(final int position, View convertView, ViewGroup parent){
+            if(convertView == null){
+                convertView = inflacter.inflate(layout, parent, false);
+            }
+
+            TextView id = (TextView) convertView.findViewById(R.id.id);
+            id.setText(arD.get(position).id);
+
+            TextView name = (TextView) convertView.findViewById(R.id.name);
+            name.setText(arD.get(position).name);
+
+            return convertView;
+        }
     }
 }
