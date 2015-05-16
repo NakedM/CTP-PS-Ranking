@@ -75,13 +75,13 @@ public class SearchProblemActivity extends ActionBarActivity {
         if(v==btn_selectOldOrder) //오래된 기수를 선택했을때 group_id is 0
         {
             menu.setHeaderTitle("오래된 기수");
-            setContexMenu(menu, 0);
+            setContextMenu(menu, 0);
 
         }
         else if(v==btn_selectYoungOrder) //최근 기수를 선택했을때 group_id is 1
         {
             menu.setHeaderTitle("최근 기수");
-            setContexMenu(menu, 1);
+            setContextMenu(menu, 1);
         }
     }
 
@@ -109,7 +109,7 @@ public class SearchProblemActivity extends ActionBarActivity {
         return true;
     }
 
-    private void setContexMenu(ContextMenu menu, int GID)
+    private void setContextMenu(ContextMenu menu, int GID)
     {
         menu.add(GID, 0, 0, "전체");
         menu.add(GID, 1, 0, "2011/1");
@@ -174,13 +174,13 @@ public class SearchProblemActivity extends ActionBarActivity {
     private class UserAdapter extends BaseAdapter
     {
         Context con;
-        LayoutInflater inflacter;
+        LayoutInflater inflater;
         ArrayList<User> arD;
         int layout;
 
         public UserAdapter(Context context, int alayout, ArrayList<User> aarD) {
             con = context;
-            inflacter = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             arD = aarD;
             layout = alayout;
         }
@@ -203,7 +203,7 @@ public class SearchProblemActivity extends ActionBarActivity {
         @Override //보여지는 함수
         public View getView(final int position, View convertView, ViewGroup parent){
             if(convertView == null){
-                convertView = inflacter.inflate(layout, parent, false);
+                convertView = inflater.inflate(layout, parent, false);
             }
 
             TextView id = (TextView) convertView.findViewById(R.id.id);
