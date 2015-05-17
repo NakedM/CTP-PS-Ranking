@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -17,10 +16,17 @@ import java.io.InputStream;
 
 public class UserInfoGraphFragment extends Fragment {
     private String dn = "UserInfoGraph";
-    public static final String ASSET_PATH = "file:///andriod_asset/";
+    public static final String ASSET_PATH = "file:///android_asset/";
     private WebView wv_userInfoGraph;
-
     private static final String ARG_SECTION_NUMBER = "section_number";
+
+    private int accept;
+    private int wrong;
+    private int timelimit;
+    private int memorylimit;
+    private int outputlimit;
+    private int runtimeerr;
+    private int compileerr;
 
     public static UserInfoGraphFragment newInstance(int sectionNumber) {
         UserInfoGraphFragment fragment = new UserInfoGraphFragment();
@@ -41,16 +47,17 @@ public class UserInfoGraphFragment extends Fragment {
         ws.setJavaScriptEnabled(true);
         ws.setBuiltInZoomControls(true);
         ws.setJavaScriptCanOpenWindowsAutomatically(true);
-        wv_userInfoGraph.setWebViewClient(new WebViewClient(){
+        loadChart();
+        /*wv_userInfoGraph.setWebViewClient(new WebViewClient(){
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                view.loadUrl(url);
-                loadChart();
-                return true;
+               loadChart();
+               return true;
             }
-        });
-        wv_userInfoGraph.loadUrl("http://");
+        });*/
+        //wv_userInfoGraph.loadUrl("http://");
         return v;
     }
 
@@ -64,12 +71,10 @@ public class UserInfoGraphFragment extends Fragment {
         } catch (IOException e) {
             Log.d(dn,e.getMessage());
         }
-        String formattedContent = String.format(content);
+        String formattedContent = String.format(content, 1, 2, 3, 4,5,6,7);
         wv_userInfoGraph.loadDataWithBaseURL(ASSET_PATH, formattedContent, "text/html", "utf-8", null);
-        wv_userInfoGraph.requestFocusFromTouch();
+        //wv_userInfoGraph.requestFocusFromTouch();
     }
-
-
 
     private static byte[] readFully(InputStream in) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -79,4 +84,6 @@ public class UserInfoGraphFragment extends Fragment {
         }
         return out.toByteArray();
     }
+
+
 }
