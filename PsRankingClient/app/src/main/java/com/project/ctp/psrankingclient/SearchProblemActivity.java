@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -145,15 +146,14 @@ public class SearchProblemActivity extends ActionBarActivity
         list.setDividerHeight(2);
 
         //리스트 아이템 클릭시 발생하는 함수
-        /*short click
+        //short click
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SearchProblemActivity.this, UserInfoActivity.class);
-                startActivity(intent);
+                Toast.makeText(SearchProblemActivity.this, "좀 더 길게 누르세요", Toast.LENGTH_SHORT).show();
             }
-        });*/
+        });
 
         //long click
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
