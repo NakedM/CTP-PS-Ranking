@@ -18,10 +18,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
 public class SearchProblemActivity extends ActionBarActivity
 {
-
     private Button btn_selectOldOrder;
     private Button btn_selectYoungOrder;
     private Button btn_search;
@@ -55,7 +53,6 @@ public class SearchProblemActivity extends ActionBarActivity
             }
         });
 
-
         btn_search = (Button) findViewById(R.id.btn_search);
         btn_search.setOnClickListener(new View.OnClickListener()
         {
@@ -65,7 +62,6 @@ public class SearchProblemActivity extends ActionBarActivity
                 setList(R.id.list_solveNot);
             }
         });
-
     }
 
     @Override
@@ -192,7 +188,6 @@ public class SearchProblemActivity extends ActionBarActivity
             arD = aarD;
             layout = alayout;
         }
-
         @Override
         public int getCount() {
             return arD.size();
