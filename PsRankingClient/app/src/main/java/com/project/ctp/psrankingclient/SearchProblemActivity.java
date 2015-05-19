@@ -18,7 +18,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class SearchProblemActivity extends ActionBarActivity {
+public class SearchProblemActivity extends ActionBarActivity
+{
 
     private Button btn_selectOldOrder;
     private Button btn_selectYoungOrder;
@@ -31,8 +32,8 @@ public class SearchProblemActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_problem);
 
-        btn_selectOldOrder = (Button)findViewById(R.id.btn_selectOldOrder);
-        btn_selectYoungOrder = (Button)findViewById(R.id.btn_selectYoungOrder);
+        btn_selectOldOrder = (Button) findViewById(R.id.btn_selectOldOrder);
+        btn_selectYoungOrder = (Button) findViewById(R.id.btn_selectYoungOrder);
 
         btn_selectOldOrder.setOnClickListener(new View.OnClickListener()
         {
@@ -54,12 +55,11 @@ public class SearchProblemActivity extends ActionBarActivity {
         });
 
 
-        btn_search = (Button)findViewById(R.id.btn_search);
+        btn_search = (Button) findViewById(R.id.btn_search);
         btn_search.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 setList(R.id.list_solve);
                 setList(R.id.list_solveNot);
             }
@@ -68,17 +68,15 @@ public class SearchProblemActivity extends ActionBarActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-    {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        if(v==btn_selectOldOrder) //오래된 기수를 선택했을때 group_id is 0
+        if (v == btn_selectOldOrder) //오래된 기수를 선택했을때 group_id is 0
         {
             menu.setHeaderTitle("오래된 기수");
             setContextMenu(menu, 0);
 
-        }
-        else if(v==btn_selectYoungOrder) //최근 기수를 선택했을때 group_id is 1
+        } else if (v == btn_selectYoungOrder) //최근 기수를 선택했을때 group_id is 1
         {
             menu.setHeaderTitle("최근 기수");
             setContextMenu(menu, 1);
@@ -88,17 +86,14 @@ public class SearchProblemActivity extends ActionBarActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) //컨텍스트 아이템을 선택했을때(입력 확인용)
     {
-        if(item.getGroupId() == 0)
-        {
+        if (item.getGroupId() == 0) {
             /*switch(item.getItemId()) 스위치문 나중에 사용 예정
             {
                 case 1:
             }*/
             strOld = item.getTitle().toString();
             btn_selectOldOrder.setText(item.getTitle()); // 버튼 내용 변경
-        }
-        else if(item.getGroupId() == 1)
-        {
+        } else if (item.getGroupId() == 1) {
             /*switch(item.getItemId()) 스위치문 나중에 사용 예정
             {
                 case 1:
@@ -109,8 +104,7 @@ public class SearchProblemActivity extends ActionBarActivity {
         return true;
     }
 
-    private void setContextMenu(ContextMenu menu, int GID)
-    {
+    private void setContextMenu(ContextMenu menu, int GID) {
         menu.add(GID, 0, 0, "전체");
         menu.add(GID, 1, 0, "2011/1");
         menu.add(GID, 2, 0, "2011/2");
@@ -146,10 +140,12 @@ public class SearchProblemActivity extends ActionBarActivity {
         UserAdapter adapter = new UserAdapter(this, R.layout.custom_user_list, arUser);
 
         ListView list;
-        list = (ListView)findViewById(listName);
+        list = (ListView) findViewById(listName);
         list.setAdapter(adapter);
         list.setDividerHeight(2);
+
         //리스트 아이템 클릭시 발생하는 함수
+        /*short click
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -157,15 +153,27 @@ public class SearchProblemActivity extends ActionBarActivity {
                 Intent intent = new Intent(SearchProblemActivity.this, UserInfoActivity.class);
                 startActivity(intent);
             }
+        });*/
+
+        //long click
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> av, View v, int position, long id) {
+            //클릭 내용
+                Intent intent = new Intent(SearchProblemActivity.this, UserInfoActivity.class);
+                startActivity(intent);
+                return true;
+            }
         });
     }
 
-
-    private class User{
+    private class User
+    {
         String id;
         String name;
 
-        User(String cid, String cname){
+        User(String cid, String cname) {
             id = cid;
             name = cname;
         }
@@ -186,23 +194,23 @@ public class SearchProblemActivity extends ActionBarActivity {
         }
 
         @Override
-        public int getCount(){
+        public int getCount() {
             return arD.size();
         }
 
         @Override
-        public Object getItem(int position){
+        public Object getItem(int position) {
             return arD.get(position).name;
         }
 
         @Override
-        public long getItemId(int position){
+        public long getItemId(int position) {
             return position;
         }
 
         @Override //보여지는 함수
-        public View getView(final int position, View convertView, ViewGroup parent){
-            if(convertView == null){
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
                 convertView = inflater.inflate(layout, parent, false);
             }
 
