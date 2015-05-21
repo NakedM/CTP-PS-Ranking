@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class StudentNumberFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_student_number, container, false);
         return view;
     }
+
     @Override
     public void onActivityCreated(Bundle savedState)
     {
@@ -30,6 +32,7 @@ public class StudentNumberFragment extends Fragment{
             }
         });
     }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
@@ -37,6 +40,14 @@ public class StudentNumberFragment extends Fragment{
         menu.setHeaderTitle("학번을 선택하세요");
         setContextMenu(menu, 0);
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if(item.getGroupId() == 0)
+            btn_studentNum.setText(item.getTitle());
+        return true;
+    }
+
     private void setContextMenu(ContextMenu menu, int GID)
     {
         menu.add(GID, 0, 0, "전체");

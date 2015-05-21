@@ -4,11 +4,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class YearFragment extends Fragment{
+public class YearFragment extends Fragment {
     private Button btn_year;
 
     @Override
@@ -16,29 +17,36 @@ public class YearFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_year, container, false);
         return view;
     }
+
     @Override
-    public void onActivityCreated(Bundle savedState)
-    {
+    public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         btn_year = (Button) getActivity().findViewById(R.id.btn_year);
-        btn_year.setOnClickListener(new View.OnClickListener(){
+        btn_year.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 registerForContextMenu(v);
                 getActivity().openContextMenu(v);
                 unregisterForContextMenu(v);
             }
         });
     }
+
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-    {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle("기수를 선택하세요");
-        setContextMenu(menu, 0);
+        setContextMenu(menu, 1);
     }
-    private void setContextMenu(ContextMenu menu, int GID)
-    {
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getGroupId() == 1)
+            btn_year.setText(item.getTitle());
+        return true;
+    }
+
+    private void setContextMenu(ContextMenu menu, int GID) {
         menu.add(GID, 0, 0, "전체");
         menu.add(GID, 1, 0, "2011/1");
         menu.add(GID, 2, 0, "2011/2");
