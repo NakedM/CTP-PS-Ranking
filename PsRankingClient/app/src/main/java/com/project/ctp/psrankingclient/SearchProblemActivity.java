@@ -58,6 +58,14 @@ public class SearchProblemActivity extends ActionBarActivity
         {
             @Override
             public void onClick(View v) {
+                //strOld < strYoung인 경우
+                if(strOld.compareTo(strYoung)<0)
+                {
+                    String temp;
+                    temp = strYoung;
+                    strYoung = strOld;
+                    strOld = temp;
+                }
                 /*
                 푼 사람과 안 푼 사람 목록 request 후 get
                  */
@@ -132,6 +140,7 @@ public class SearchProblemActivity extends ActionBarActivity
         ArrayList<User> arUser;
         arUser = new ArrayList<User>();
         User user;
+
         user = new User("pppgod", "strangeyun");
         arUser.add(user);
         user = new User("dodo3371", "nuclear");

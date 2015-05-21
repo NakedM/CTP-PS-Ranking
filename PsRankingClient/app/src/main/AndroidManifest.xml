@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.project.ctp.psrankingclient" >
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -36,7 +38,10 @@
             android:name=".UserInfoActivity"
             android:label="@string/title_activity_user_info" >
         </activity>
+        <activity
+            android:name=".MadebyActivity"
+            android:label="@string/title_activity_madeby" >
+        </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
 </manifest>

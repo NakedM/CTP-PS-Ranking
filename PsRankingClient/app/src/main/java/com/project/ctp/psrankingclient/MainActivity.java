@@ -7,20 +7,23 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class MainActivity extends ActionBarActivity {
 
+    private ImageView img_logo;
     private Button btn_moveRankingAct;
     private Button btn_moveSearchProblemAct;
     private Button btn_moveSettingAct;
     private Button btn_exit;
     private String an = "main"; //activity name 로그용
-
+    private int logoCnt = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        img_logo = (ImageView) findViewById(R.id.img_logo);
         btn_moveRankingAct = (Button) findViewById(R.id.btn_moveRankingAct);
         btn_moveSearchProblemAct = (Button) findViewById(R.id.btn_moveSearchProblemAct);
         btn_moveSettingAct = (Button) findViewById(R.id.btn_moveSettingAct);
@@ -33,6 +36,14 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Intent intent;
                 switch (view.getId()) {
+                    case R.id.img_logo:
+                        logoCnt++;
+                        if(logoCnt >= 8) {
+                            logoCnt = 0;
+                            intent = new Intent(MainActivity.this, MadebyActivity.class);
+                            startActivity(intent);
+                        }
+                        break;
                     case R.id.btn_moveRankingAct: //랭킹 액티비티로 이동
                         intent = new Intent(MainActivity.this, RankingActivity.class);
                         startActivity(intent);
@@ -52,7 +63,7 @@ public class MainActivity extends ActionBarActivity {
             }
         };
 
-
+        img_logo.setOnClickListener(listener);
         btn_moveRankingAct.setOnClickListener(listener);
         btn_moveSearchProblemAct.setOnClickListener(listener);
         btn_moveSettingAct.setOnClickListener(listener);
