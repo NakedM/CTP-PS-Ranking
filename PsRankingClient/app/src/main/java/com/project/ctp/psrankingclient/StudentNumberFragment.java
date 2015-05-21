@@ -2,6 +2,7 @@ package com.project.ctp.psrankingclient;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ public class StudentNumberFragment extends Fragment{
     {
         super.onActivityCreated(savedState);
         btn_studentNum = (Button) getActivity().findViewById(R.id.btn_studentNum);
+        Log.d("stunum", btn_studentNum.toString());
         btn_studentNum.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -38,13 +40,14 @@ public class StudentNumberFragment extends Fragment{
     {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle("학번을 선택하세요");
-        setContextMenu(menu, 0);
+        setContextMenu(menu, 2);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if(item.getGroupId() == 0)
+        if(item.getGroupId() == 2)
             btn_studentNum.setText(item.getTitle());
+        Log.d("stunum", btn_studentNum.toString());
         return true;
     }
 

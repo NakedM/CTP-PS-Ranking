@@ -2,6 +2,7 @@ package com.project.ctp.psrankingclient;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class YearFragment extends Fragment {
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
         btn_year = (Button) getActivity().findViewById(R.id.btn_year);
+        Log.d("year",btn_year.toString());
         btn_year.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,8 +43,9 @@ public class YearFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if (item.getGroupId() == 1)
+        //if (item.getGroupId() == 1)
             btn_year.setText(item.getTitle());
+        Log.d("year",btn_year.toString());
         return true;
     }
 
