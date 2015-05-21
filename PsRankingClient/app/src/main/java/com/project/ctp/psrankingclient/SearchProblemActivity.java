@@ -58,6 +58,9 @@ public class SearchProblemActivity extends ActionBarActivity
         {
             @Override
             public void onClick(View v) {
+                /*
+                푼 사람과 안 푼 사람 목록 request 후 get
+                 */
                 setList(R.id.list_solve);
                 setList(R.id.list_solveNot);
             }
@@ -156,7 +159,9 @@ public class SearchProblemActivity extends ActionBarActivity
         {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int position, long id) {
-            //클릭 내용
+
+                //눌려진 사용자 아이디 전송
+
                 Intent intent = new Intent(SearchProblemActivity.this, UserInfoActivity.class);
                 startActivity(intent);
                 return true;
