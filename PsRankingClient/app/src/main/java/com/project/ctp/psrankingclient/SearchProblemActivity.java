@@ -23,8 +23,8 @@ public class SearchProblemActivity extends ActionBarActivity
     private Button btn_selectOldOrder;
     private Button btn_selectYoungOrder;
     private Button btn_search;
-    private String strOld;
-    private String strYoung;
+    private String strOld = "전체";
+    private String strYoung = "전체";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class SearchProblemActivity extends ActionBarActivity
             @Override
             public void onClick(View v) {
                 //strOld < strYoung인 경우
+
                 if(strOld.compareTo(strYoung)<0)
                 {
                     String temp;
