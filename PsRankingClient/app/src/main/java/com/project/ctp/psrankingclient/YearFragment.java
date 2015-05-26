@@ -80,8 +80,13 @@ public class YearFragment extends Fragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        //if (item.getGroupId() == 1)
+
+        if (item.getGroupId() == 1)
             btn_year.setText(item.getTitle());
+        else if(item.getGroupId() == 2) {
+            Button btn_studentNum = (Button) getActivity().findViewById(R.id.btn_studentNum);
+            btn_studentNum.setText(item.getTitle());
+        }
         Log.d("year",btn_year.toString());
         return true;
     }

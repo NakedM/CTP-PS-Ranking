@@ -81,8 +81,10 @@ public class StudentNumberFragment extends Fragment{
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        if(item.getGroupId() == 2)
+       /* if(item.getGroupId() == 2) {
+            btn_studentNum = (Button) getActivity().findViewById(R.id.btn_studentNum);
             btn_studentNum.setText(item.getTitle());
+        }쓸모가 없는듯 하다*/
         Log.d("stunum", btn_studentNum.toString());
         return true;
     }
