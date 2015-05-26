@@ -1,6 +1,7 @@
 package com.project.ctp.psrankingclient;
 
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,16 +45,23 @@ public class YearFragment extends Fragment {
             }
         });
 
-        //add data to ListView
-        for(int i=0, count=20; i<count; i++){
-            mDataSourceList.add("列表数据" + i);
-        }
+        ArrayList<User> arUser;
+        arUser = new ArrayList<User>();
+        User user;
 
+        user = new User("1","pppgod", "이상윤");
+        arUser.add(user);
+        user = new User("2","dodo3371", "김정은");
+        arUser.add(user);
 
-        ListView listView = (ListView) getActivity().findViewById(R.id.list_year);
-        listView.setAdapter(new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mDataSourceList));
+        UserAdapter adapter = new UserAdapter(getActivity(), R.layout.custom_rank_list, arUser);
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        ListView list;
+        list = (ListView) getActivity().findViewById(R.id.list_year);
+        list.setAdapter(adapter);
+        list.setDividerHeight(2);
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), UserInfoActivity.class);
@@ -99,5 +108,64 @@ public class YearFragment extends Fragment {
         menu.add(GID, 18, 0, "2019/2");
         menu.add(GID, 19, 0, "2020/1");
         menu.add(GID, 20, 0, "2020/2");
+    }
+    private class User
+    {
+        String rank;
+        String id;
+        String name;
+
+        User(String crank, String cid, String cname) {
+            rank = crank;
+            id = cid;
+            name = cname;
+        }
+    }
+
+    private class UserAdapter extends BaseAdapter
+    {
+        Context con;
+        LayoutInflater inflater;
+        ArrayList<User> arD;
+        int layout;
+
+        public UserAdapter(Context context, int alayout, ArrayList<User> aarD) {
+            con = context;
+            inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            arD = aarD;
+            layout = alayout;
+        }
+        @Override
+        public int getCount() {
+            return arD.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return arD.get(position).name;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override //보여지는 함수
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = inflater.inflate(layout, parent, false);
+            }
+
+            TextView rank = (TextView) convertView.findViewById(R.id.rank);
+            rank.setText(arD.get(position).rank);
+
+            TextView id = (TextView) convertView.findViewById(R.id.id);
+            id.setText(arD.get(position).id);
+
+            TextView name = (TextView) convertView.findViewById(R.id.name);
+            name.setText(arD.get(position).name);
+
+            return convertView;
+        }
     }
 }
