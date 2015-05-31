@@ -29,7 +29,7 @@ public class UserInfoTextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v =  inflater.inflate(R.layout.fragment_user_info_text, container, false);
-        setList(R.id.lv_userInfoText);
+        setList(R.id.list_userInfo);
         return v;
     }
 
