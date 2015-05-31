@@ -4,8 +4,8 @@
     tools:context="com.project.ctp.psrankingclient.UserInfoGraphFragment">
 
     <WebView
-        android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_width="400dp"
+        android:layout_height="570dp"
         android:id="@+id/wv_userInfoGraph"
         android:layout_gravity="center" />
 
