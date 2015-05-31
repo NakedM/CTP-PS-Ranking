@@ -10,7 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity">
 
-
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:onClick="onClick"
+        android:src="@drawable/ctp_logo"/>
     <Button
         android:id = "@+id/btn_moveRankingAct"
         android:layout_width="300dp"
