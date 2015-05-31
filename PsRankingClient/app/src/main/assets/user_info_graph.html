@@ -17,18 +17,20 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'Result');
+        data.addColumn('number', 'Count');
         data.addRows([
-          ['Mushrooms', 3],
-          ['Onions', 1],
-          ['Olives', 1],
-          ['Zucchini', 1],
-          ['Pepperoni', 2]
+          ['맞았습니다.', %d],
+          ['틀렸습니다.', %d],
+          ['시간 초과', %d],
+          ['메모리 초과', %d],
+          ['출력 초과', %d],
+          ['런타임 에러', %d],
+          ['컴파일 에러', %d]
         ]);
 
         // Set chart options
-        var options = {'title':'How Much Pizza I Ate Last Night',
+        var options = {'title':'코드 제출 결과',
                        'width':400,
                        'height':300};
 
