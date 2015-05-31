@@ -17,4 +17,29 @@ public class UserInfo
     private String run_error;
     private String compile_error;
     private String etc;
+
+    public String getMem_id()
+    {   return mem_id;  }
+    public String getStu_id()
+    {   return stu_id;  }
+    public String getStu_name()
+    {   return stu_name;    }
+    public String getJoin_year()
+    {   return join_year;   }
+    public String getBoj_id()
+    {   return boj_id;  }
+    public String getTotal()
+    {   return total;   }
+    public String getAccept()
+    {   return accept;  }
+    public String getWrong_answer()
+    {   return wrong_answer;    }
+    public String getTime_limit()
+    {   return time_limit;  }
+    public String getRun_error()
+    {   return run_error;   }
+    public String getCompile_error()
+    {   return compile_error;   }
+    public String getEtc()
+    {   return etc; }
 }
