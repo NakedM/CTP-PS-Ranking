@@ -29,10 +29,13 @@ public class UserInfoTextFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v =  inflater.inflate(R.layout.fragment_user_info_text, container, false);
-        setList(R.id.list_userInfo);
         return v;
     }
-
+    public void onActivityCreated(Bundle savedState)
+    {
+        super.onActivityCreated(savedState);
+        setList(R.id.list_userInfo);
+    }
     private void setList(int listName) {
         ArrayList<UserInfo> arUserInfo;
         arUserInfo = new ArrayList<UserInfo>();
