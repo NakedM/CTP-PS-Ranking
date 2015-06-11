@@ -2,8 +2,10 @@ package com.project.ctp.psrankingclient;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,6 +18,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class SearchProblemActivity extends ActionBarActivity
@@ -70,10 +81,90 @@ public class SearchProblemActivity extends ActionBarActivity
                 /*
                 푼 사람과 안 푼 사람 목록 request 후 get
                  */
+                new AsyncTaskParseJson().execute();
+
                 setList(R.id.list_solve);
                 setList(R.id.list_solveNot);
             }
         });
+    }
+    public class AsyncTaskParseJson extends AsyncTask<String, String, String> {
+
+        final String TAG = "AsyncTaskParseJson.java";
+
+        // set your json string url here
+        String url = "http://eb-django-env.elasticbeanstalk.com/ctp/hakgb11/?format=json";
+
+        // contacts JSONArray
+        JSONArray dataJsonArr = null;
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected String doInBackground(String... arg0) {
+            String stream="";
+            try {
+                URL acmicpc = new URL(url);
+                URLConnection ac = acmicpc.openConnection();
+                BufferedReader in = new BufferedReader(new InputStreamReader(ac.getInputStream(), "UTF-8"));
+                String inputLine, ret = "";
+                StringBuilder a = new StringBuilder();
+                while ((inputLine = in.readLine()) != null)
+                    stream += inputLine;
+                in.close();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+
+
+            stream =
+                    "{\"user\":[{\"boj_id\":\"hakgb11\",\"stu_id\":12142380,\"stu_name\":\"�닿컯��\",\"join_year\":14,\"solved\":381,\"total\":921,\"accept\":282,\"wrong\":381,\"timelimit\":293,\"memorylimit\":483,\"outputlimit\":471,\"runtimeerr\":482,\"compileerr\":383,\"univ_name\":\"�명븯���숆탳\"}]}";
+            Log.d("stream", stream);
+            ////////////////////// JSON PARSING //////////////////
+            try {
+                JSONObject json = new JSONObject(stream);
+                JSONArray jArr = json.getJSONArray("user");
+
+                String[] jsonName = {
+                        "boj_id",
+                        "stu_id",
+                        "stu_name",
+                        "join_year",
+                        "solved",
+                        "total",
+                        "accept",
+                        "wrong",
+                        "timelimit",
+                        "memorylimit",
+                        "outputlimit",
+                        "runtimeerr",
+                        "compileerr",
+                        "univ_name"};
+
+                String[][] parseredData = new String[jArr.length()][jsonName.length];
+                for(int i=0 ; i<jArr.length(); i++) {
+                    json = jArr.getJSONObject(i);
+                    if(json != null) {
+                        for(int j=0 ; j<jsonName.length ; j++)
+                            parseredData[i][j] = json.getString(jsonName[j]);
+                    }
+                }
+
+                for(int i=0 ; i<parseredData.length ; i++) {
+                    for(int j=0 ; j<parseredData[i].length ; j++) {
+                        Log.d("JSON" + jsonName[j], parseredData[i][j]);
+                    }
+                }
+            } catch(JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String strFromDoInBg) {}
     }
 
     @Override
