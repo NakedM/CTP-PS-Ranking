@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -42,6 +43,8 @@ public class SearchProblemActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_problem);
 
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
+
         btn_selectOldOrder = (Button) findViewById(R.id.btn_selectOldOrder);
         btn_selectYoungOrder = (Button) findViewById(R.id.btn_selectYoungOrder);
 
@@ -65,13 +68,13 @@ public class SearchProblemActivity extends ActionBarActivity
         });
 
         btn_search = (Button) findViewById(R.id.btn_search);
-        btn_search.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                //strOld < strYoung인 경우
+                btn_search.setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v) {
+                        //strOld < strYoung인 경우
 
-                if(strOld.compareTo(strYoung)<0)
+                        if(strOld.compareTo(strYoung)<0)
                 {
                     String temp;
                     temp = strYoung;
@@ -81,8 +84,10 @@ public class SearchProblemActivity extends ActionBarActivity
                 /*
                 푼 사람과 안 푼 사람 목록 request 후 get
                  */
-                new AsyncTaskParseJson().execute();
-
+               // new AsyncTaskParseJson().execute();
+                Crawler craw = new Crawler("http://eb-django-env.elasticbeanstalk.com/ctp/hakgb11/?format=json");
+                craw.run();
+                Log.d("myCRAWLER", craw.stream);
                 setList(R.id.list_solve);
                 setList(R.id.list_solveNot);
             }
