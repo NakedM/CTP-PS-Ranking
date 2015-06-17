@@ -2,7 +2,6 @@ package com.project.ctp.psrankingclient;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -19,15 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 
 public class SearchProblemActivity extends ActionBarActivity
@@ -37,6 +29,9 @@ public class SearchProblemActivity extends ActionBarActivity
     private Button btn_search;
     private String strOld = "전체";
     private String strYoung = "전체";
+    private String[] jsonName = {"boj_id", "stu_id", "stu_name", "join_year", "solved",
+            "total", "accept", "wrong", "timelimit", "memorylimit",
+            "outputlimit", "runtimeerr", "compileerr", "univ_name"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,112 +63,36 @@ public class SearchProblemActivity extends ActionBarActivity
         });
 
         btn_search = (Button) findViewById(R.id.btn_search);
-                btn_search.setOnClickListener(new View.OnClickListener()
-                {
-                    @Override
-                    public void onClick(View v) {
-                        //strOld < strYoung인 경우
-
-                        if(strOld.compareTo(strYoung)<0)
-                {
+        btn_search.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                //strOld < strYoung인 경우
+                if (strOld.compareTo(strYoung) < 0) {
                     String temp;
                     temp = strYoung;
                     strYoung = strOld;
                     strOld = temp;
                 }
-                /*
-                푼 사람과 안 푼 사람 목록 request 후 get
-                 */
-               // new AsyncTaskParseJson().execute();
                 Crawler craw = new Crawler("http://eb-django-env.elasticbeanstalk.com/ctp/hakgb11/?format=json");
                 craw.run();
-                Log.d("myCRAWLER", craw.stream);
+                Log.d("myCRAWLER", craw.getStream());
+                JParser jparser = new JParser(jsonName);
+                try {
+                    jparser.Parsing(craw.getStream(), "user");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 setList(R.id.list_solve);
                 setList(R.id.list_solveNot);
             }
         });
-    }
-    public class AsyncTaskParseJson extends AsyncTask<String, String, String> {
 
-        final String TAG = "AsyncTaskParseJson.java";
-
-        // set your json string url here
-        String url = "http://eb-django-env.elasticbeanstalk.com/ctp/hakgb11/?format=json";
-
-        // contacts JSONArray
-        JSONArray dataJsonArr = null;
-
-        @Override
-        protected void onPreExecute() {}
-
-        @Override
-        protected String doInBackground(String... arg0) {
-            String stream="";
-            try {
-                URL acmicpc = new URL(url);
-                URLConnection ac = acmicpc.openConnection();
-                BufferedReader in = new BufferedReader(new InputStreamReader(ac.getInputStream(), "UTF-8"));
-                String inputLine, ret = "";
-                StringBuilder a = new StringBuilder();
-                while ((inputLine = in.readLine()) != null)
-                    stream += inputLine;
-                in.close();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-
-
-            stream =
-                    "{\"user\":[{\"boj_id\":\"hakgb11\",\"stu_id\":12142380,\"stu_name\":\"�닿컯��\",\"join_year\":14,\"solved\":381,\"total\":921,\"accept\":282,\"wrong\":381,\"timelimit\":293,\"memorylimit\":483,\"outputlimit\":471,\"runtimeerr\":482,\"compileerr\":383,\"univ_name\":\"�명븯���숆탳\"}]}";
-            Log.d("stream", stream);
-            ////////////////////// JSON PARSING //////////////////
-            try {
-                JSONObject json = new JSONObject(stream);
-                JSONArray jArr = json.getJSONArray("user");
-
-                String[] jsonName = {
-                        "boj_id",
-                        "stu_id",
-                        "stu_name",
-                        "join_year",
-                        "solved",
-                        "total",
-                        "accept",
-                        "wrong",
-                        "timelimit",
-                        "memorylimit",
-                        "outputlimit",
-                        "runtimeerr",
-                        "compileerr",
-                        "univ_name"};
-
-                String[][] parseredData = new String[jArr.length()][jsonName.length];
-                for(int i=0 ; i<jArr.length(); i++) {
-                    json = jArr.getJSONObject(i);
-                    if(json != null) {
-                        for(int j=0 ; j<jsonName.length ; j++)
-                            parseredData[i][j] = json.getString(jsonName[j]);
-                    }
-                }
-
-                for(int i=0 ; i<parseredData.length ; i++) {
-                    for(int j=0 ; j<parseredData[i].length ; j++) {
-                        Log.d("JSON" + jsonName[j], parseredData[i][j]);
-                    }
-                }
-            } catch(JSONException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String strFromDoInBg) {}
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo
+            menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
         if (v == btn_selectOldOrder) //오래된 기수를 선택했을때 group_id is 0
@@ -299,6 +218,7 @@ public class SearchProblemActivity extends ActionBarActivity
             arD = aarD;
             layout = alayout;
         }
+
         @Override
         public int getCount() {
             return arD.size();

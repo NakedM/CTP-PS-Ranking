@@ -17,9 +17,9 @@ public class Crawler extends Thread
     String url;
     String stream;
 
-    Crawler(String curl)
+    Crawler(String url)
     {
-        url = curl;
+        this.url = url;
         stream="";
     }
 
@@ -28,9 +28,9 @@ public class Crawler extends Thread
         Log.i("myCRAWLER", "begin");
         try {
 
-            URL acmicpc = new URL(url);
-            URLConnection ac = acmicpc.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(ac.getInputStream(), "UTF-8"));
+            URL myServer = new URL(url);
+            URLConnection Connection = myServer.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(Connection.getInputStream(), "UTF-8"));
             String inputLine, ret = "";
             StringBuilder a = new StringBuilder();
             while ((inputLine = in.readLine()) != null)
@@ -44,5 +44,15 @@ public class Crawler extends Thread
             e.printStackTrace();
         }
         Log.i("myCRAWLER", "end");
+    }
+
+    public String getStream()
+    {
+        return stream;
+    }
+
+    public void setUrl(String url)
+    {
+        this.url = url;
     }
 }
