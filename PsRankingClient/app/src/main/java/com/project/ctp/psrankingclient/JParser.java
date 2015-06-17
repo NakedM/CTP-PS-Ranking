@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
+ * JSON 파싱 클래스
  * Created by Sangyun on 2015-06-14.
  */
 public class JParser
@@ -20,8 +21,8 @@ public class JParser
 
     /**
      * Parsing JSON
-     * @param stream
-     * @param JArrName
+     * @param stream 전체 JSON 문자열
+     * @param JArrName 파싱할 JSON 배열의 이름
      * @throws JSONException
      */
     public void Parsing(String stream, String JArrName) throws JSONException
@@ -44,11 +45,19 @@ public class JParser
             }
         }
     }
+
+    /**
+     * @return String[][] 파싱한 결과
+     */
     public String[][] getParseredData()
     {
         return parseredData;
     }
 
+    /**
+     * jsonName 재설정
+     * @param jsonName
+     */
     public void setJsonName(String[] jsonName)
     {
         this.jsonName = jsonName;
