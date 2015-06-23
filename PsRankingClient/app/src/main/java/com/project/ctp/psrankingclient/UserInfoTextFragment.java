@@ -18,13 +18,14 @@ import java.util.ArrayList;
 
 public class UserInfoTextFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
-    private String[] jsonName = {"stu_id", "stu_name", "boj_id", "solved", "total", "join_year",
+    private String[] jsonName = {"stu_id", "stu_name", "boj_id", "join_year", "solved", "total",
              "accept", "wrong", "timelimit", "memorylimit",
             "outputlimit", "runtimeerr", "compileerr", "univ_name"};
-    private String[] info = {"학번", "이름", "아이디", "푼 문제", "제출", "맞았습니다", "틀렸습니다", "시간 초과", "메모리 초과", "출력 초과", "런타임 에러", "컴파일 에러", "학교"};
+    private String[] info = {"학번", "이름", "아이디", "가입연도", "푼 문제", "제출", "맞았습니다", "틀렸습니다", "시간 초과", "메모리 초과", "출력 초과", "런타임 에러", "컴파일 에러", "학교"};
     private TextView tv_name;
     private TextView tv_id;
     View v;
+    
     public static UserInfoTextFragment newInstance(int sectionNumber) {
         UserInfoTextFragment fragment = new UserInfoTextFragment();
         Bundle args = new Bundle();
@@ -68,7 +69,7 @@ public class UserInfoTextFragment extends Fragment {
         UserInfo user;
 
 
-        for(int i=3 ; i<info.length ; i++) {
+        for(int i=4 ; i<info.length ; i++) {
             Log.e("why", info[i]);
             user = new UserInfo(info[i], parseredData[0][i]);
             arUserInfo.add(user);
