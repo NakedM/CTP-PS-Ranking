@@ -29,7 +29,7 @@ public class SearchProblemActivity extends ActionBarActivity
     private Button btn_search;
     private String strOld = "전체";
     private String strYoung = "전체";
-    private String[] jsonName = {"boj_id", "stu_id", "stu_name", "join_year", "solved",
+    private String[] jsonName = {"stu_id", "boj_id", "stu_name", "join_year", "solved",
             "total", "accept", "wrong", "timelimit", "memorylimit",
             "outputlimit", "runtimeerr", "compileerr", "univ_name"};
 
@@ -74,15 +74,7 @@ public class SearchProblemActivity extends ActionBarActivity
                     strYoung = strOld;
                     strOld = temp;
                 }
-                Crawler craw = new Crawler("http://eb-django-env.elasticbeanstalk.com/ctp/hakgb11/?format=json");
-                craw.run();
-                Log.d("myCRAWLER", craw.getStream());
-                JParser jparser = new JParser(jsonName);
-                try {
-                    jparser.Parsing(craw.getStream(), "user");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
                 setList(R.id.list_solve);
                 setList(R.id.list_solveNot);
             }
@@ -153,15 +145,30 @@ public class SearchProblemActivity extends ActionBarActivity
     }
 
     private void setList(int listName) {
+        Crawler craw = new Crawler("http://eb-django-env.elasticbeanstalk.com/ctp/hakgb11/?format=json");
+        craw.run();
+        JParser jparser = new JParser(jsonName);
+        try {
+            String testStr = "{\"user\":[{\"boj_id\":\"hakgb11\",\"stu_id\":12142380,\"stu_name\":\"이강호\",\"join_year\":14,\"solved\":381,\"total\":921,\"accept\":282,\"wrong\":381,\"timelimit\":293,\"memorylimit\":483,\"outputlimit\":471,\"runtimeerr\":482,\"compileerr\":383,\"univ_name\":\"Inha\"}]}";
+            jparser.Parsing(testStr, "user");
+            //jparser.Parsing(craw.getStream(), "user");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Log.i("setList", "jparsing end");
+        String[][] parseredData = jparser.getParseredData();
+
+        Log.i("setList", "add list begin");
         ArrayList<User> arUser;
         arUser = new ArrayList<User>();
         User user;
-
-        user = new User("pppgod", "strangeyun");
-        arUser.add(user);
-        user = new User("dodo3371", "nuclear");
-        arUser.add(user);
-
+        for(int i=0 ; i<parseredData.length ; i++) {
+            Log.d("setList", parseredData[i][1]);
+            Log.d("setList", parseredData[i][2]);
+            user = new User(parseredData[i][1], parseredData[i][2]);
+            arUser.add(user);
+        }
+        Log.i("setList", "add list end");
         UserAdapter adapter = new UserAdapter(this, R.layout.custom_user_list, arUser);
 
         ListView list;
@@ -192,6 +199,7 @@ public class SearchProblemActivity extends ActionBarActivity
                 return true;
             }
         });
+        Log.i("setList", "end");
     }
 
     private class User
